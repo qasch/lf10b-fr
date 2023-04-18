@@ -1,0 +1,44 @@
+= Dokumentation LF10b Freiburg
+
+== Grundlegende Kommandos
+
+* `cd` - Wechselt in ein Verzeichnis
+* `ls` - Listet den Inhalt des aktuellen Verzeichnisses
+* `ls -a` - Listet den Inhalt des aktuellen Verzeichnisses, inkl. versteckter Dateien
+* `ls -l` - Listet den Inhalt des aktuellen Verzeichnisses, ausführliche Schreibweise/Informationen
+* `man <kommando>` - Öffnet die Handbuchseite/Hilfe von `<kommando>`
+* `pwd` - Print Working Directory, zeigt den absoluten Pfad des Verzeichnisses an, in dem man sich gerade befindet
+* `date` - zeigt aktuelles Datum/Uhrzeit, Ausgabe kann formatiert werden
+* `ip address` / `ip a` - Konfiguration der Netzwerkschnittstellen, z.B. zur Ermittlung der IP-Adresse
+* `touch` - erstellt leere Dateien
+* `mkdir` - erstellt ein neues Verzeichnis
+* `cp <quelle> <ziel>` - kopiert <quelle> nach <ziel>
+* `mv <quelle> <ziel>` - verschiebt <quelle> nach <ziel>
+* `rm <datei>` - löscht `<datei>`
+
+== Pfadangaben
+
+* relativer Pfad::Weg/Pfad vom aktuellen Verzeichnis zum Ziel
+* absoluter Pfad::Weg/Pfad vom Wurzel-Verzeichnis (`/`) zum Ziel
+
+== Tastenkürzel
+
+=== Manpage
+
+* `q` Manpage verlassen
+* `/` in der Manpage suchen
+
+=== Shell
+
+* `STRG+L` / `clear` -  Bildschirm leeren (wie `cls`)
+* `STRG+C` - sowas wie _Abbruch_
+* `STRG+D` / `exit` - Shell schließen
+* Pfeil-nach-oben: rückwärts durch die zuletzt eingegebenen Befehle blättern (`history`)
+
+== Git
+
+* Git ist ein Programm zur Versionskontrolle (VCS - Version Control Software)
+* entwickelt von Linux Torvalds
+* ermöglicht u.a. bestimmte Zustände der Software als eine Art _Snapshot_ zu sichern
+
+
