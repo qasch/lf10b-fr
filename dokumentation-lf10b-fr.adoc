@@ -15,6 +15,7 @@
 * `cp <quelle> <ziel>` - kopiert <quelle> nach <ziel>
 * `mv <quelle> <ziel>` - verschiebt <quelle> nach <ziel>
 * `rm <datei>` - löscht `<datei>`
+* Option `-r` - beim Kopieren und Löschen: auch Verzeichnisse, nicht nur Dateien
 
 == Pfadangaben
 
@@ -40,5 +41,27 @@
 * Git ist ein Programm zur Versionskontrolle (VCS - Version Control Software)
 * entwickelt von Linux Torvalds
 * ermöglicht u.a. bestimmte Zustände der Software als eine Art _Snapshot_ zu sichern
+
+== Aliase
+
+* `alias ll='ls -l'` - durch Eingabe von `ll` wird das Kommando `ls -l` ausgeführt 
+* Werden Aliase nur auf der Shell definiert, sind sie auch nur für die aktuelle Shell-Session gülitg
+* Sollen sie permanent gespeichert werden, müssen sie in eine Datei eingetragen werden, z.B. `~/.bashrc` oder `~/.bash_aliases`
+
+== Dateioperationen "sicherer" machen
+
+* für `cp`, `mv` und `rm` gibt es die Option `-i`, so dass eine Nachfrage erscheint, falls das Ziel vorhanden ist
+
+== Wildcards/Platzhalter
+
+* `*` - steht für ein beliebiges Zeichen, dass beliebig oft vorkommen darf
+* `?` - steht für ein beliebiges Zeichen, dass exakt einmal vorkommt
+
+ # lösche die Dateien file1.txt,  files.txt, file10basdlkjalskdjfakjlkfjaf.txt usw.
+ rm -r file*.txt
+
+ # lösche die Dateien file1.txt,  files.txt, aber nicht file10basdlkjalskdjfakjlkfjaf.txt usw.
+ rm -r file?.txt
+
 
 
