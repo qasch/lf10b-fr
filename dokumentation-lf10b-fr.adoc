@@ -115,3 +115,66 @@ Login Shell des Users `root` ausgeben (`/bin/bash`):
 
 == Benutzerverwaltung
 
+== Dateizugehörigkeiten ändern
+
+ chown user:group datei
+
+== Dateiberechtigungen
+
+   u     g     o
+  user group other
+ -rw-  r--   r--    1 tux tux    0 Apr 20 09:49 new.txt
+
+3 Symbole für Berechtigungen:
+
+ r: read -> lesen
+ w: write -> schreiben
+ x: execute -> ausführen
+
+=== Symbolische Rechtevergabe
+
+ chmod o-r datei
+ chmod u+w datei
+ chmod o-rw datei
+ chmod g=rwx datei
+
+Sinnvoll, wenn nur einzelne Rechte hinzugefügt/entfernt werden sollen, unabhängig von anderen bestehenden Rechten:
+
+ chmod u+x script
+
+=== Oktale Rechtevergabe
+
+ r: read    -> 4
+ w: write   -> 2
+ x: execute -> 1
+ -: kein Recht -> 0
+ 
+ chmod 640 new.txt 
+
+Diese Rechtevergabe eignet sich, wenn Rechte absolut gesetzt werden sollen, für User, Group und Others gleichzeitig:
+
+ chmod 600 secret.txt
+
+=== Herkunft Oktale Rechtevergabe
+
+ 4 : 100
+ 2 : 010
+ 1 : 001
+
+ 7 : 111
+ 6 : 110
+
+ 111110100
+ rwxrw-r-- datei
+----
+
+
+
+
+
+
+
+
+
+
+
