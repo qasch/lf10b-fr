@@ -63,5 +63,55 @@
  # lösche die Dateien file1.txt,  files.txt, aber nicht file10basdlkjalskdjfakjlkfjaf.txt usw.
  rm -r file?.txt
 
+== FHS - Filesystem Hierarchy Standard
 
+Einige der wichtigsten Verzeichnisse unter `/`:
+
+* `/boot` - ausführbares Kernelimage, Konfigutationsdateien des Bootloaders
+* `/bin` - von regulären Benutzern ausführbare Dateien
+* `/sbin` - nur von root ausführbare Dateien
+* `/etc` - systemweiten Konfigurationsdateien
+* `/dev` - Gerätedateien (Speichermedien, virtuelle Geräte ...)
+* `/var` - variable Dateien (Log-Dateien, E-Mails, unter Debian auch Dateien die ein Webservers ausliefert)
+* `/proc` - hier werden Informationen über jeden laufenden Prozess abgelegt. Existiert nur im RAM, weitere Infos über z.B. CPUs etc.
+* `/sys` - Erweiterung von `/proc`
+* `/home` - Verzeichnis, in dem sich die Heimatverzeichnisse der regulären Benutzer befinden
+* `/root` - Heimatverzeichnis des Benutzers `root`
+
+== Standardkanäle
+
+* `stdin` - Standardeingabekanal (`0`)
+* `stout` - Standardausgabekanal (`1`)
+* `stderr` - Standardfehlerkanal (`2`)
+
+== Redirects / Umleitungen
+
+* `echo huhu 1> ausgabekanal.txt` -> in `ausgabekanal.txt` steht `huhu`
+* `echo huhu > ausgabekanal.txt` -> in `ausgabekanal.txt` steht `huhu`
+* `ls -l /etc > ausgabe-etc.txt` -> in `ausgabe-etc.txt` steht die Ausgabe von `ls -l /etc`
+* `ls -l gibtsnicht 2> fehler.txt` -> (das Verzeichnis `gitsnicht` existiert nicht: in `fehler.txt` steht eine entsprechende Fehlermelung
+
+Mit den Redirect Operatoren `>` und `>>` können wir Ausgaben in *Dateien* umleiten.
+
+Mit `>` wird der Inhalt der Datei überschrieben, mit `>>` angehängt.
+
+Mit `<` kann der Inhalt einer Datei an den Eingabekanal eines Kommandos umgeleitet werden.
+
+ mail -s "Ein Betreff" tux@linux.com < mailtext.txt
+
+== Kommandopipelines
+
+Mit der Pipe `|` wird der Ausgabekanal von `kommando1` mit dem Eingabekanal von `kommanod2` verbunden. So können Kommandos miteinander verbunden werden.
+
+ kommando 1 | kommando 2
+
+Die Ausgabe von `ls -l` mit dem Pager `less` öffnen, so dass wir darin blättern und suchen können:
+
+ ls -l /etc | less
+
+Login Shell des Users `root` ausgeben (`/bin/bash`):
+
+ grep root /etc/passwd | cut -d: -f7 
+
+== Benutzerverwaltung
 
