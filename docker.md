@@ -242,3 +242,5 @@ Im Verzeichnis `public-html` im aktuellen Verzeichnis auf dem Host kann jetzt z.
 <h1>Docker Compose mit Volumes</h1>
 <p>Die Daten hier bleiben persistent</p>
 ```
+
+Der Container startet jetzt und gibt den die hinterlegte `index.html` Seite aus
