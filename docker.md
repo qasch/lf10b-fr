@@ -153,14 +153,6 @@ gestoppten Container starten
 docker start <container-id/name>
 ```
 
-gestoppten Container entfernen 
-
-```
-docker rm <container-id/name>
-```
-
----
-
 ## Docker - grundlegende Kommandos
 
 ### Ports weiterleiten
@@ -177,4 +169,76 @@ Das interne Verzeichnis `/some/folder/inside/container` auf das Verzeichnis `/so
 
 ```
 docker run -v /some/local/folder/on/host:/some/foler/inside/container <iamge>
+```
+
+---
+
+## Docker - aufräumen
+
+Da Container immer neu gebaut werden, sammeln sich mit der Zeit einige ungenutzte an. Diese sollte man von Zeit zu Zeit aufräumen, allein schon um Namenskonflikten vorzubeugen.
+
+Nur gestoppte Container können entfernt werden:
+
+```
+docker rm <container-id/name>
+```
+
+### alles aufräumen
+
+Mit dem folgenden Kommando werden nicht mehr verwendete Container, Netzwerke etc auf einmal entfernt werden:
+
+```
+docker system prune
+```
+
+---
+
+## Doker Compose
+
+Mit `docker compose` können mehrere Container auf einmal gestartet und komfortabel über eine YAML-Datei konfiguriert werden.
+
+Vorgehen:
+
+1. Verzeichnis erstellen, z.B. für den einen Webserver `mkdir webserver`
+2. In diesem Verzeichnis einen Datei mit Namen `docker-compose.yml` erstellen mit folgendem Inhalt:
+
+```
+version: '3.7'
+
+services:
+  apache:
+    image: httpd
+    ports:
+      - 8888:80
+    volumes:
+      - ./public-html:/usr/local/apache2/htdocs/
+```
+3. Kommando `docker compose up` ausführen
+
+4. Oder `docker compose up -d` um den Prozess im Hintergrund auszuführen
+
+## Docker - Volumes
+
+Um Daten persistent zu speichern, können **Volumes** verwendet werden.
+
+Dabei wird ein Verzeichnis innherhalb des Containers auf ein Verzeichnis des Hostsystems gespiegelt.
+
+
+```
+version: '3.7'
+
+services:
+  apache:
+    image: httpd
+    ports:
+      - 8888:80
+    volumes:
+      - ./public-html:/usr/local/apache2/htdocs/
+```
+
+Im Verzeichnis `public-html` im aktuellen Verzeichnis auf dem Host kann jetzt z.B. eine `index.html` mit beliebigem Inhalt angelegt werden:
+
+```
+<h1>Docker Compose mit Volumes</h1>
+<p>Die Daten hier bleiben persistent</p>
 ```
