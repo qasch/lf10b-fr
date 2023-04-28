@@ -2,6 +2,8 @@
 
 - hosts: server
   become: yes
+  vars:
+    ip_address_client: "{{ hostvars[inventory_hostname]['ansible_default_ipv4']['address'] }}"
   tasks:
   - name: Install apache2
     apt:
@@ -9,12 +11,21 @@
       - apache2
       state: present 
 
-  - name: Copy index.html 
-    copy:
-      src: index.html
+  - name: Copy index.html template to apache web-root
+    template:
+      src: index.html.j2
       dest: /var/www/html/index.html
       owner: www-data
       group: www-data
       mode: '0644'
 
+  - name: Secure SSH Server by disabling PasswordAuthentication
+    copy:
+      src: sshd_config
+      dest: /etc/ssh/sshd_config
+      owner: root
+      group: root
+      mode: '0644'
 
+  - name: Restart SSH Server to enable new configuration
+    shell: systemctl restart sshd.service
