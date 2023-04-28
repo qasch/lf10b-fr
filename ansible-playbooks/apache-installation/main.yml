@@ -1,0 +1,20 @@
+---
+
+- hosts: server
+  become: yes
+  tasks:
+  - name: Install apache2
+    apt:
+      pkg:
+      - apache2
+      state: present 
+
+  - name: Copy index.html 
+    copy:
+      src: index.html
+      dest: /var/www/html/index.html
+      owner: www-data
+      group: www-data
+      mode: '0644'
+
+

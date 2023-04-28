@@ -117,7 +117,18 @@ Login Shell des Users `root` ausgeben (`/bin/bash`):
 
 == Dateizugehörigkeiten ändern
 
+Benutzer und Gruppe ändern:
+
  chown user:group datei
+
+nur Benutzer ändern:
+
+ chown user datei
+
+nur Gruppe ändern:
+
+ chown :group datei
+ chgrp group datei
 
 == Dateiberechtigungen
 
@@ -157,6 +168,7 @@ Diese Rechtevergabe eignet sich, wenn Rechte absolut gesetzt werden sollen, für
 
 === Herkunft Oktale Rechtevergabe
 
+----
  4 : 100
  2 : 010
  1 : 001
@@ -167,6 +179,8 @@ Diese Rechtevergabe eignet sich, wenn Rechte absolut gesetzt werden sollen, für
  111110100
  rwxrw-r-- datei
 ----
+
+== Paketverwaltung
 
 
 

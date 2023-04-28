@@ -1,0 +1,19 @@
+---
+
+# Welche Maschinen sollen kontaktiert werden
+# Ansible schaut in der Datei /etc/ansible/hosts nach
+- hosts: server
+  # Benutzer root auf den Zielservern werden
+  become: yes
+  # Was wir alles machen wollen:
+  tasks:
+  - name: Install some packages
+    apt:
+      pkg:
+      - cowsay
+      - htop
+      - sudo
+      - openssh-server
+      state: present 
+
+
