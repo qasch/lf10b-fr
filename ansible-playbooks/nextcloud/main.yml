@@ -27,20 +27,23 @@
     file:
       path: '{{ nextcloud_dir }}'
       state: directory
+      owner: root
+      group: root
       mode: '0755'
 
-# - 3 Container:
-#   - Nextcloud
-#   - nginx
-#   - Datenbank
-# - Konfiguration mittels docker-compose.yml
   - name: docker-compose.yml auf Server kopieren
     copy:
       src: docker-compose.yml
       dest: '{{ nextcloud_dir }}'
+      owner: root
+      group: root
+      mode: '0644'
 
   - name: nginx.conf auf Server kopieren
     copy:
       src: nginx.conf
       dest: '{{ nextcloud_dir }}'
+      owner: root
+      group: root
+      mode: '0644'
 
