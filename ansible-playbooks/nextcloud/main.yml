@@ -1,18 +1,12 @@
 ---
 
-# Vorgensweise:
-# - Container starten
-#
-
 - hosts: server
   become: yes
   vars:
     nextcloud_dir: /srv/docker/nextcloud
+    server_ip: "{{ hostvars[inventory_hostname]['ansible_default_ipv4']['address'] }}"
   tasks:
-  # - docker installieren
-  #   - aus den Paketquellen!
-  #   - neueste Version nach Doku? -> evtl. falls Paketversion nicht kompatibel
-  # - evtl. docker compose installieren
+
   - name: Docker und docker-compose aus den Standard Debian Paketquellen installieren
     apt:
       pkg:
@@ -47,3 +41,10 @@
       group: root
       mode: '0644'
 
+  - name: Start der Container
+    shell: cd '{{ nextcloud_dir }}' && docker-compose up -d
+
+  - name: Nextcloud config anpassen (Trusted Domains)
+    template:
+      src: config.php.j2
+      dest: '{{ nextcloud_dir }}/nextcloud-data/config/config.php'
