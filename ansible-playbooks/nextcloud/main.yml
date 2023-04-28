@@ -2,7 +2,6 @@
 
 # Vorgensweise:
 # - evtl. docker compose installieren
-# - Verzeichnis für docker-compose.yml und Mounts erstellen
 # - 3 Container:
 #   - Nextcloud
 #   - nginx
@@ -15,16 +14,20 @@
   become: yes
 
   tasks:
-# - docker installieren
-#   - aus den Paketquellen!
-#   - neueste Version nach Doku? -> evtl. falls Paketversion nicht kompatibel
+  # - docker installieren
+  #   - aus den Paketquellen!
+  #   - neueste Version nach Doku? -> evtl. falls Paketversion nicht kompatibel
   - name: Docker aus den Standard Debian Paketquellen installieren
     apt:
       pkg:
       - docker 
-      - docker-engine 
       - docker.io 
       - containerd 
       - runc
       state: present
 
+  - name: Verzeichnis für docker-compose.yml, mounts und Dateien erstellen
+    file:
+      path: /srv/docker/nextcloud
+      state: directory
+      mode: '0755'
