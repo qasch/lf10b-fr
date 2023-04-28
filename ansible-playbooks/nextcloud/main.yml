@@ -1,33 +1,46 @@
 ---
 
 # Vorgensweise:
-# - evtl. docker compose installieren
-# - 3 Container:
-#   - Nextcloud
-#   - nginx
-#   - Datenbank
-# - Konfiguration mittels docker-compose.yml
 # - Container starten
 #
 
 - hosts: server
   become: yes
-
+  vars:
+    nextcloud_dir: /srv/docker/nextcloud
   tasks:
   # - docker installieren
   #   - aus den Paketquellen!
   #   - neueste Version nach Doku? -> evtl. falls Paketversion nicht kompatibel
-  - name: Docker aus den Standard Debian Paketquellen installieren
+  # - evtl. docker compose installieren
+  - name: Docker und docker-compose aus den Standard Debian Paketquellen installieren
     apt:
       pkg:
       - docker 
       - docker.io 
       - containerd 
       - runc
+      - docker-compose
       state: present
 
   - name: Verzeichnis für docker-compose.yml, mounts und Dateien erstellen
     file:
-      path: /srv/docker/nextcloud
+      path: '{{ nextcloud_dir }}'
       state: directory
       mode: '0755'
+
+# - 3 Container:
+#   - Nextcloud
+#   - nginx
+#   - Datenbank
+# - Konfiguration mittels docker-compose.yml
+  - name: docker-compose.yml auf Server kopieren
+    copy:
+      src: docker-compose.yml
+      dest: '{{ nextcloud_dir }}'
+
+  - name: nginx.conf auf Server kopieren
+    copy:
+      src: nginx.conf
+      dest: '{{ nextcloud_dir }}'
+
